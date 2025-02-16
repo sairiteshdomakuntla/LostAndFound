@@ -109,9 +109,11 @@ app.delete("/item/:id", async (req, res) => {
   }
 });
 
+console.log("Serving static files from:", path.join(__dirname, "Frontend", "dist"));
+
 // ============================== Serve Frontend ==============================
 // Serve static files from the React frontend build folder
-app.use(express.static(path.join(__dirname,'./Frontend/dist')));
+app.use(express.static(path.join(__dirname,"Frontend","dist")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./Frontend/dist/index.html"));
