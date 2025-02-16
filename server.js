@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/files',express.static("files"))
 const multer = require("multer");
+const path = require('path');
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const mongoURL = process.env.mongoURL;
@@ -101,6 +102,12 @@ app.delete("/item/:id", async (req, res) => {
     return res.status(500).send({ message: error.message });
   }
 });
+
+
+app.use(express.static("./Frontend/build"))
+app.get("*",(req,res)=>{
+  res.sendFile(path.resolve(__dirname,"Frontend","build","index.html"))
+})
 
 app.listen(PORT, () => {
   console.log(`server started at port ${PORT}`);
