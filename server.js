@@ -10,7 +10,14 @@ app.use(express.json());
 app.use(cors());
 app.use('/files',express.static("files"))
 const multer = require("multer");
-const path = require('path');
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Define __dirname manually
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const mongoURL = process.env.mongoURL;
